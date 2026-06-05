@@ -24,4 +24,7 @@ Once docker image was generated successfully the run the docker container  **doc
 
 **Using Docker application loading :** <img width="1918" height="297" alt="image" src="https://github.com/user-attachments/assets/27d5964a-c14a-4fcc-a027-cb2b0f2438d3" />
 
+**Step 4: Install kubectl tool** for working with kubernetes clusters and **eksctl tool** for working EKS Cluster and **AWS CLI tool** for working with AWS services.
 
+Kubectl : nirha@NikhilKumar MINGW64 ~ $ curl -LO "https://dl.k8s.io/release/v1.30.0/bin/windows/amd64/kubectl.exe" ( add system variables accordingly )
+eksctl : 
