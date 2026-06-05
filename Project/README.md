@@ -25,8 +25,3 @@ Once docker image was generated successfully the run the docker container  **doc
 **Using Docker application loading :** <img width="1918" height="297" alt="image" src="https://github.com/user-attachments/assets/27d5964a-c14a-4fcc-a027-cb2b0f2438d3" />
 
 
-
-<<<<<<< HEAD
-
-=======
->>>>>>> d9e0c6f (Initial commit)
