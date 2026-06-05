@@ -26,4 +26,7 @@ Once docker image was generated successfully the run the docker container  **doc
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d9e0c6f (Initial commit)
