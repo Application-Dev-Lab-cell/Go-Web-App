@@ -2,7 +2,7 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
 metadata:
-  name: demo-cluster
+  name: go-web-app-cluster
   region: us-east-1
 
 nodeGroups:
