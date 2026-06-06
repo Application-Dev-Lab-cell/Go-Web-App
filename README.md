@@ -1,103 +1,359 @@
-# Go Web Application
+# 🚀 Go Web Application
 
-This is a simple website written in Golang. It uses the `net/http` package to serve HTTP requests.
+[![Go](https://img.shields.io/badge/Go-1.21+-00ADD8?logo=go&logoColor=white)](https://go.dev/)
+[![Docker](https://img.shields.io/badge/Docker-Supported-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
+[![Kubernetes](https://img.shields.io/badge/Kubernetes-Ready-326CE5?logo=kubernetes&logoColor=white)](https://kubernetes.io/)
+[![Helm](https://img.shields.io/badge/Helm-Charts-0F1689?logo=helm&logoColor=white)](https://helm.sh/)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
-## Running the server
+A modern, production-ready web application built with Go featuring complete DevOps implementation with **Docker**, **Kubernetes**, **Helm**, and **AWS EKS**.
 
-To run the server, execute the following command:
+---
+
+## 📋 Table of Contents
+
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Architecture](#-architecture)
+- [Prerequisites](#-prerequisites)
+- [Quick Start](#-quick-start)
+- [Installation](#-installation)
+- [Usage](#-usage)
+- [Deployment](#-deployment)
+- [Project Structure](#-project-structure)
+- [Contributing](#-contributing)
+- [License](#-license)
+
+---
+
+## ✨ Features
+
+- ✅ **Lightweight & Fast** - Built with Go's `net/http` package
+- ✅ **Multi-page Website** - Home, Courses, About, and Contact pages
+- ✅ **Containerized** - Docker support for consistent environments
+- ✅ **Orchestrated** - Kubernetes deployment ready
+- ✅ **Infrastructure as Code** - Helm charts for easy deployment
+- ✅ **Cloud Native** - AWS EKS integration
+- ✅ **Load Balanced** - Ingress configuration included
+- ✅ **Scalable** - Auto-scaling ready
+
+---
+
+## 🛠️ Tech Stack
+
+| Component | Technology |
+|-----------|-----------|
+| **Backend** | Go (Golang) |
+| **Containerization** | Docker |
+| **Orchestration** | Kubernetes |
+| **Package Manager** | Helm |
+| **Cloud Platform** | AWS EKS |
+| **Infrastructure** | Terraform/CloudFormation |
+
+---
+
+## 🏗️ Architecture
+
+```
+┌─────────────────────────────────────────┐
+│         Internet / Load Balancer        │
+└────────────────┬────────────────────────┘
+                 │
+     ┌───────────┼───────────┐
+     │           │           │
+┌────▼────┐ ┌────▼────┐ ┌────▼────┐
+│  Pod 1  │ │  Pod 2  │ │  Pod 3  │
+│ Go App  │ │ Go App  │ │ Go App  │
+└────┬────┘ └────┬────┘ └────┬────┘
+     └───────────┼───────────┘
+         Kubernetes Service
+         (Port 8080)
+```
+
+---
+
+## 📦 Prerequisites
+
+### Local Development
+- **Go** 1.21+ - [Download](https://go.dev/dl/)
+- **Git** - [Download](https://git-scm.com/download/win)
+- **VS Code** - [Download](https://code.visualstudio.com/)
+
+### Docker & Kubernetes
+- **Docker Desktop** - [Download](https://www.docker.com/products/docker-desktop)
+- **kubectl** - [Install Guide](https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/)
+- **eksctl** - [Install Guide](https://eksctl.io/installation/)
+- **Helm** - [Install Guide](https://helm.sh/docs/intro/install/)
+
+### AWS Integration
+- **AWS CLI** - [Download](https://awscli.amazonaws.com/AWSCLIV2.msi)
+- **AWS Account** with appropriate IAM permissions
+
+---
+
+## 🚀 Quick Start
+
+### 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/Application-Dev-Lab-cell/go-web-app.git
+cd go-web-app
+```
+
+### 2️⃣ Run Locally
 
 ```bash
 go run main.go
 ```
 
-The server will start on port 8080. You can access it by navigating to `http://localhost:8080/courses` in your web browser.
+Access the application at: **http://localhost:8080**
 
-## EKS cluster setup
+Available routes:
+- `/` - Home page
+- `/courses` - Courses page
+- `/about` - About page
+- `/contact` - Contact page
 
-To create the cluster from the repository root:
+---
 
-```powershell
-# If eksctl is on PATH
-eksctl create cluster --config-file cluster.yaml
+## 📥 Installation
 
-# If eksctl is not on PATH, use the local executable path
-C:\Users\ombas\eksctl_Windows_amd64\eksctl.exe create cluster --config-file cluster.yaml
+### Option A: Local Setup
+
+```bash
+# Install dependencies
+go mod download
+
+# Run tests
+go test -v
+
+# Build the application
+go build -o main .
+
+# Run the binary
+./main
 ```
 
-Make sure your AWS credentials are configured and that the `eksctl` executable is available in your environment.
+### Option B: Docker
 
-## Looks like this
+```bash
+# Build the Docker image
+docker build -t go-web-app:latest .
 
-![Website](static/images/golang-website.png)
+# Run the container
+docker run --rm -p 8080:8080 go-web-app:latest
 
-Start to end of the Project Flow : 
+# Access at http://localhost:8080
+```
 
-# Go-Web-App
-Complete Devops Implementation in one project ( **CICD Using Docker and Kubernetes** )
+### Option C: Kubernetes (Local)
 
-**Git + Docker + Kubernetes + Helm Application + Git actions + argo**
+```bash
+# Build and push image
+docker build -t <your-registry>/go-web-app:v1.0 .
+docker push <your-registry>/go-web-app:v1.0
 
-**Setp 1 : Install Visual Studio Application for coding.**
-**Step 2 : Install Git** ( https://git-scm.com/install/windows) **and Go lang** ( https://go.dev/dl/ )**software and set-up accordingly** ( To validate the application locally )
+# Update image in deployment.yaml
+# Then apply manifests
+kubectl apply -f k8s/manifests/deployment.yaml
+kubectl apply -f k8s/manifests/service.yaml
+kubectl apply -f k8s/manifests/ingress.yaml
 
-**Clone the github repository :** 
+# Verify deployment
+kubectl get pods
+kubectl get svc
+```
 
-git clone https://github.com/Application-Dev-Lab-cell/Go-Web-App.git 
+---
 
-<img width="1915" height="966" alt="image" src="https://github.com/user-attachments/assets/9fc4a2f0-cc1c-4eaf-b36e-c2d1bbd45db4" />
+## 💻 Usage
 
-**Step 3: Install docker desktop and create the account if you dont have an account.**
+### Local Development
 
-Once docker setup was done successfully, create a docker file and build as **docker build -t <docker-username>/go-web-app:v0 .** with the latest tag. and then docker image will be generated. 
+```bash
+# Run the application
+go run main.go
 
-Once docker image was generated successfully the run the docker container  **docker run -p 8080:8080 -it nkr0209/go-web-app:v0** and access the URL http://localhost:8080/courses
+# Run with verbose output
+go run main.go -v
 
-**Docker Image :** <img width="1476" height="957" alt="image" src="https://github.com/user-attachments/assets/1e7cf567-9588-41ee-b476-ef79f585fd3b" /><img width="1486" height="126" alt="image" src="https://github.com/user-attachments/assets/486174e8-0b98-43af-a2ea-ece536ab7bb6" />
+# Run tests
+go test ./... -v
 
-**Docker container :** <img width="1476" height="387" alt="image" src="https://github.com/user-attachments/assets/5af04ff9-191b-4560-a1a2-f88ae9c733f4" />
+# Run specific test
+go test -run TestHandler -v
+```
 
-**Using Docker application loading :** <img width="1918" height="297" alt="image" src="https://github.com/user-attachments/assets/27d5964a-c14a-4fcc-a027-cb2b0f2438d3" />
+### View Application
 
-**Step 4: Install kubectl tool** for working with kubernetes clusters and **eksctl tool** for working EKS Cluster and **AWS CLI tool** for working with AWS services.
+Open your browser and navigate to:
+```
+http://localhost:8080/courses
+```
 
-Kubectl : nirha@NikhilKumar MINGW64 ~ $ curl -LO "https://dl.k8s.io/release/v1.30.0/bin/windows/amd64/kubectl.exe" ( add system variables accordingly )
-eksctl : 
+---
 
-Install AWS CLI : Download and run the AWS CLI MSI installer for Windows (64-bit): **https://awscli.amazonaws.com/AWSCLIV2.msi**
+## 🌐 Deployment
 
-Once above all installed You need to connect your local machine with aws cli account. For that you need to create  IAM role and generate the necessary keys to access it from local machine. 
+### AWS EKS Setup
 
-PS C:\Users\nirha\Documents\GitHub Repos\go-web-app> aws configure (aws configure then give the keys as displayed in the cmd)
+#### Step 1: Configure AWS Credentials
 
-Now create the cluster so that you can run the kubernetes deployment service and ingress services accordingly. 
+```powershell
+# Install AWS CLI
+# Download: https://awscli.amazonaws.com/AWSCLIV2.msi
 
- To create cluster, **C:\Users\nirha\Documents\GitHub Repos\go-web-app\cluster.yaml**
- <img width="1490" height="950" alt="image" src="https://github.com/user-attachments/assets/c233193e-f22a-47d7-ae25-922a2588da2d" />
- **EKS Cluster Created successfully in aws account :**
- <img width="1557" height="288" alt="image" src="https://github.com/user-attachments/assets/275cadfa-74f5-42b0-8b12-63e5be32f311" />
+# Configure credentials
+aws configure
+# Enter AWS Access Key ID
+# Enter AWS Secret Access Key
+# Enter default region (e.g., us-east-1)
+# Enter default output format (json)
+```
 
-**CloudFormation :**
- <img width="1578" height="390" alt="image" src="https://github.com/user-attachments/assets/e5e3fb9a-d2f4-4cf7-beb7-5386b5df74c5" />
-**Elastic Ip address :** 
-<img width="1613" height="247" alt="image" src="https://github.com/user-attachments/assets/1153a0a5-d636-4b5f-aec8-fa262e1b6572" />
-**Auto scaling Groups:** 
-<img width="1606" height="342" alt="image" src="https://github.com/user-attachments/assets/41363c26-58e7-4263-9db2-93bd10f02543" />
+#### Step 2: Create EKS Cluster
 
-**Instances :** 
-<img width="1596" height="382" alt="image" src="https://github.com/user-attachments/assets/eab277cf-cf10-4652-bfd2-cf081c0a6d7d" />
-**Volumes:** 
-<img width="1587" height="273" alt="image" src="https://github.com/user-attachments/assets/4b0c3c39-df9b-4f07-b40f-4dbe5a3691ee" />
+```powershell
+# Create cluster using eksctl
+eksctl create cluster --config-file cluster.yaml
 
+# Verify cluster creation
+kubectl get nodes
+```
 
-Now we can apply kubectl for deployment.yaml, ingress.yaml and service.yaml files under k8s/manifests.
+#### Step 3: Deploy with kubectl
 
-PS C:\Users\nirha\Documents\GitHub Repos\go-web-app> docker push nkr0209/go-web-app:v1
-The push refers to repository [docker.io/nkr0209/go-web-app]
+```powershell
+# Apply Kubernetes manifests
+kubectl apply -f k8s/manifests/deployment.yaml
+kubectl apply -f k8s/manifests/service.yaml
+kubectl apply -f k8s/manifests/ingress.yaml
 
-PS C:\Users\nirha\Documents\GitHub Repos\go-web-app> kubectl apply -f k8s/manifests/deployment.yaml
-deployment.apps/go-web-app unchanged
+# Check deployment status
+kubectl get deployments
+kubectl get pods
+kubectl get svc
+kubectl get ingress
+```
 
-PS C:\Users\nirha\Documents\GitHub Repos\go-web-app> kubectl get pods
+#### Step 4: Deploy with Helm (Recommended)
+
+```powershell
+# Install the Helm chart
+helm install go-web-app ./helm/go-web-app-chart
+
+# Verify installation
+helm list
+kubectl get pods
+
+# Update deployment
+helm upgrade go-web-app ./helm/go-web-app-chart
+
+# Uninstall if needed
+helm uninstall go-web-app
+```
+
+### Verify Deployment
+
+```powershell
+# Get service details
+kubectl get svc go-web-app
+
+# Get ingress details
+kubectl get ingress
+
+# View logs
+kubectl logs -f deployment/go-web-app
+
+# Port forward for local access
+kubectl port-forward svc/go-web-app 8080:8080
+```
+
+---
+
+## 📁 Project Structure
+
+```
+go-web-app/
+├── main.go                 # Application entry point
+├── main_test.go           # Unit tests
+├── go.mod                 # Go module definition
+├── Dockerfile             # Docker build instructions
+├── cluster.yaml           # EKS cluster configuration
+├── README.md             # This file
+├── LICENSE               # MIT License
+├── static/               # Static files
+│   ├── home.html        # Home page
+│   ├── courses.html     # Courses page
+│   ├── about.html       # About page
+│   ├── contact.html     # Contact page
+│   └── images/          # Image assets
+├── k8s/                 # Kubernetes manifests
+│   └── manifests/
+│       ├── deployment.yaml
+│       ├── service.yaml
+│       └── ingress.yaml
+└── helm/                # Helm charts
+    └── go-web-app-chart/
+        ├── Chart.yaml
+        ├── values.yaml
+        └── templates/
+            ├── deployment.yaml
+            ├── service.yaml
+            └── ingress.yaml
+```
+
+---
+
+## 🧪 Testing
+
+Run the test suite:
+
+```bash
+go test -v
+go test -cover
+go test -race
+```
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
+4. **Push** to the branch (`git push origin feature/amazing-feature`)
+5. **Open** a Pull Request
+
+---
+
+## 📝 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 👤 Author
+
+**Nikhil Kumar** | [GitHub Profile](https://github.com/Application-Dev-Lab-cell)
+
+---
+
+## 📞 Support
+
+For issues, questions, or suggestions, please open an [Issue](https://github.com/Application-Dev-Lab-cell/go-web-app/issues) on GitHub.
+
+---
+
+<div align="center">
+
+**⭐ If you find this project helpful, please consider giving it a star!**
+
+Made with ❤️ by [Nikhil Kumar](https://github.com/Application-Dev-Lab-cell)
+
+</div>
 NAME                         READY   STATUS    RESTARTS   AGE
 go-web-app-7cc76c866-dx554   1/1     Running   0          12s
 
@@ -280,6 +536,9 @@ replicaset.apps/go-web-app-7cc76c866   1         1         1       49s
 PS C:\Users\nirha\Documents\GitHub Repos\go-web-app\helm> 
 
 argo Application for automatic deployment and complete flow. 
+
+CICD Pipeline using github actions : 
+![alt text](image.png)
 
 <img width="1627" height="826" alt="image" src="https://github.com/user-attachments/assets/993aabf9-b23d-44f0-968f-96c085d62a87" />
 
