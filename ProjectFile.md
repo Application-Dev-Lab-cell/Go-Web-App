@@ -245,5 +245,7 @@ NAME                                   DESIRED   CURRENT   READY   AGE
 replicaset.apps/go-web-app-7cc76c866   1         1         1       49s
 PS C:\Users\nirha\Documents\GitHub Repos\go-web-app\helm> 
 
+argo
+
 
 
