@@ -39,6 +39,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Set up Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.23'
+
     - name: Run golangci-lint
       uses: golangci/golangci-lint-action@v6
       with:
@@ -94,4 +99,3 @@ jobs:
         git add helm/go-web-app-chart/values.yaml
         git commit -m "Update tag in Helm chart"
         git push
-
